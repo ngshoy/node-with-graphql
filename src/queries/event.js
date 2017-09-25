@@ -1,5 +1,7 @@
 const {GraphQLID, GraphQLNonNull} = require('graphql');
 const EventType = require('../types/event');
+const Event = require('../db/event');
+const getProjection = require('../utils/projection');
 
 module.exports = {
     type: EventType,
@@ -9,13 +11,14 @@ module.exports = {
             type: new GraphQLNonNull(GraphQLID)
         }
     },
-    resolve: (root, args) => {
+    resolve: (root, {id}, _, fieldASTs) => {
         return new Promise((resolve, reject) => {
-            resolve({
-                id: 'adfasdf',
-                name: 'Launch party',
-                date: 'today'
-            })
+            const projection = getProjection(fieldASTs);
+            Event.findById(id)
+                .select(projection)
+                .exec()
+                .then(data => resolve(data))
+                .catch(errors => reject(errors))
         })
     }
 };
