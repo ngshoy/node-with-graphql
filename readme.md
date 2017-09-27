@@ -1,4 +1,8 @@
+###Instructions on starting
+```
+npm install -g mongodb mongoose
 install mongodb and mongoose globally
-start mongo
+mongod
 export MONGODB_URI=mongodb://localhost/eventsite
-start node src
+npm run dev
+```
