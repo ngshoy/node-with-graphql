@@ -1,4 +1,4 @@
-#Instructions on starting server
+#Instructions on starting server :metal:
 ```
 1. npm install -g mongodb mongoose
 2. mongod
